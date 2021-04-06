@@ -68,7 +68,17 @@
     if (lang) {
       document.documentElement.setAttribute('lang', lang[1]);
     }
-
+    let script = () => {
+      let eles = document.getElementsByTagName('span')
+      for (let i = 0; i < eles.length; i++) {
+        let el = eles[i];
+        let text = "【韶山映山红】"
+          console.log(el.style.color)
+          if(el.innerText.indexOf(text)>=0){
+            el.classList.add('hl-ignored')
+          }
+      }
+    }
     // Docsify configuration
     window.$docsify = {
       notFoundPage: '_sidebar.md',
@@ -88,6 +98,7 @@
       maxLevel: 4,
       subMaxLevel: 2,
       "DocHighlighter": {
+        script,
         leancloud: {
           appId: "dvMVEXYBm0Rpy5JyWhhm6D43-gzGzoHsz",
           appKey: "UeGNjOzrueJjiSpjzipJpvfJ",
@@ -99,6 +110,11 @@
         paths: 'auto',
         placeholder: '搜索',
       },
+         search: {
+      maxAge: 86400000,
+      namespace: 'website-1',
+      depth: 1,
+    }, 
       plugins: [
       ]
     };
@@ -117,8 +133,12 @@
 
   <!-- plugins -->
   <script src="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-highlight@latest/dist/docsify-highlight.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/docsify-highlight@latest/dist/docsify-highlight.umd.min.js"></script>
+  <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-highlight@latest/dist/docsify-highlight.min.css">-->
+  <!--<script src="https://cdn.jsdelivr.net/npm/docsify-highlight@latest/dist/docsify-highlight.umd.min.js"></script>-->
+  <link rel="stylesheet" href="./dist/docsify-highlight.css">
+  <script src="./dist/docsify-highlight.umd.js"></script>
+  <!--<script src="//unpkg.com/lunr/lunr.js"></script>-->
+<!--<script src="search.js"></script>-->
 </body>
 
 </html>

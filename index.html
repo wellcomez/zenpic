@@ -68,7 +68,7 @@
     if (lang) {
       document.documentElement.setAttribute('lang', lang[1]);
     }
-    let script = () => {
+    let pre= () => {
       let eles = document.getElementsByTagName('span')
       for (let i = 0; i < eles.length; i++) {
         let el = eles[i];
@@ -78,6 +78,21 @@
             el.classList.add('hl-ignored')
           }
       }
+    }
+    let sorttoc = (a,b)=>{
+      let getnum=(s)=>{
+        try{
+          return parseInt(s.match(/教你炒股票(\d+)/g)[0].substring(5))
+        }catch(e){
+        }
+      }
+      let n1 = getnum(a)
+      let n2 = getnum(b)
+      if(n1!=undefined&&n2!=undefined){
+        if(n1==n2)return 0;
+        return n1>n2?1:-1;
+      }
+      return a.localeCompare(b, "zh");
     }
     // Docsify configuration
     window.$docsify = {
@@ -98,7 +113,7 @@
       maxLevel: 4,
       subMaxLevel: 2,
       "DocHighlighter": {
-        script,
+        script:{pre,sorttoc},
         leancloud: {
           appId: "dvMVEXYBm0Rpy5JyWhhm6D43-gzGzoHsz",
           appKey: "UeGNjOzrueJjiSpjzipJpvfJ",
@@ -133,10 +148,10 @@
 
   <!-- plugins -->
   <script src="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-highlight@latest/dist/docsify-highlight.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/docsify-highlight@latest/dist/docsify-highlight.umd.min.js"></script>
-  <!--<link rel="stylesheet" href="./dist/docsify-highlight.css">-->
-  <!--<script src="./dist/docsify-highlight.umd.js"></script>-->
+  <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-highlight@latest/dist/docsify-highlight.min.css">-->
+  <!--<script src="https://cdn.jsdelivr.net/npm/docsify-highlight@latest/dist/docsify-highlight.umd.min.js"></script>-->
+  <link rel="stylesheet" href="./dist/docsify-highlight.css">
+  <script src="./dist/docsify-highlight.umd.js"></script>
   <!--<script src="//unpkg.com/lunr/lunr.js"></script>-->
 <!--<script src="search.js"></script>-->
 </body>
